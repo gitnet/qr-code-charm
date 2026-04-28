@@ -1,26 +1,41 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { QRGenerator } from "@/components/qr/QRGenerator";
+import { QrCode } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title: "QR Code Generator with Logo" },
+      { name: "description", content: "Convert any link into a beautiful QR code and add your custom logo." },
+    ],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
+function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
+    <main
+      className="min-h-screen px-4 py-12 md:py-20"
+      style={{ background: "var(--gradient-subtle)" }}
     >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+      <div className="mx-auto max-w-5xl">
+        <header className="mb-10 text-center">
+          <div
+            className="mx-auto mb-5 inline-flex h-14 w-14 items-center justify-center rounded-2xl text-primary-foreground"
+            style={{ background: "var(--gradient-hero)" }}
+          >
+            <QrCode className="h-7 w-7" />
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
+            QR Code Generator
+          </h1>
+          <p className="mt-3 text-base md:text-lg text-muted-foreground max-w-xl mx-auto">
+            Turn any link into a scannable QR code. Add your logo to make it yours.
+          </p>
+        </header>
+        <QRGenerator />
+      </div>
+    </main>
   );
 }
-
-function Index() {
-  return <PlaceholderIndex />;
 }
